@@ -1,0 +1,57 @@
+﻿Filter
+目的	 SmartTable ＋　Filter機能
+‐SmartTableがベース
+‐SmartTableに付属していない機能、改善が必要な機能を追加
+‐ngRepeatを使うため高速化も考慮
+
+依存ライブラリ
+	Bootstrap
+	JQuery
+	Underscore
+	Less
+
+SmartTable基本機能
+	stSafe
+追加機能
+	Filter	CheckBox On/Off
+			All Check	
+			Text Filter
+			選択しても閉じない	
+			各Column独立	
+			Fix Header
+			表示されているものだけをFilterに表示
+			Sort
+			Sortされているかのアイコン
+			Filter、Sort中は Loading表示
+			最初表示するものだけLoad　Pagenation on Scroll InfinityLoad
+			Column幅を％で表現
+	SmartTable 自作
+--------------------------------------------------------------------------------------------------------------
+第一弾
+	－各ColumnでAnd条件でFilter
+	－smart table 上で動作する
+　　	－どのAllを選択しても無条件で全部表示
+	－使い方の想定としては、しぼりこみ（全表示→選択→選択）
+
+	GUI
+		選択しても閉じない
+		選択領域が一行
+
+第二弾
+	-各ColumnでOr条件でFilter
+	-各ColumnでSort
+	-各Columnで文字列検索　全体でも検索
+
+	--------------------------------------------------------------------------------------------------------------
+	機能一覧
+
+	選択しても閉じない
+	選択領域が一行
+	各ColumnでSort
+	各Columnで文字列検索　全体でも検索
+	各ColumnでAnd条件でFilter
+	Fix Header
+	表示されているものだけをFilterに表示
+	Filter、Sort中は Loading表示
+	Column幅を％で表現
+	最初表示するものだけLoad　Pagenation on Scroll InfinityLoad

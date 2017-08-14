@@ -1,0 +1,44 @@
+﻿<div ng-if="disable">{{dropdownLabel}}</div>
+<div class="dropdown" ng-if="!disable">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        {{dropdownLabel}}
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-click="$event.stopPropagation()">
+        <li>
+            <button class="btn btn-xs" ng-click="clear()"><span class="glyphicon glyphicon-refresh"></span></button>
+            <button class="btn btn-xs" ng-click="sort(false)"><span class="glyphicon glyphicon-sort-by-alphabet"></span></button>
+            <button class="btn btn-xs" ng-click="sort(true)"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span></button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-xs" ng-click="showListingItem()"><span class="glyphicon glyphicon-list"></span></button>
+            <button class="btn btn-xs" ng-click="showCheckedItem()"><span class="glyphicon glyphicon-check"></span></button>
+        </li>
+        <li><input type="text" class="searchtext" ng-model="searchText" ng-change="textSearch(searchText)" ng-model-options="{debounce: 1000}"></li>
+        <li ng-repeat="item in distinctItems">
+            <label class="filteritem" ng-class="{filterdiveder:$first}">
+                <input type="checkbox" ng-model="item.selected" ng-change="filterChanged(item)">&nbsp;&nbsp;{{item.value}}
+            </label>
+        </li>
+    </ul>
+    <style>
+        ul > li:nth-child(-n+2) {
+            padding-left:10px;
+            padding-right:10px;
+            padding-bottom:5px;
+        }
+        .filteritem:hover{
+    background-color:green;
+}
+
+.filteritem{
+    width:100%;
+    padding-left:10px;
+}
+.filterdiveder{
+    border-bottom:1px solid #4cff00;
+}
+.dropdown-menu{
+    background-color: rgba(255,0,0,0.5);
+}
+    </style>
+</div> 
