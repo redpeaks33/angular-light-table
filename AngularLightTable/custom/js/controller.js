@@ -42,7 +42,7 @@ main.controller('MyController', ['$scope',  function ($scope) {
     {
         var line = [{id:1,name:11},{id:2,name:12},{id:3,name:13},{id:4,name:14},{id:5,name:15}]
         var model = [{id:1,name:'A'},{id:2,name:'B'},{id:3,name:'C'},{id:4,name:'D'},{id:5,name:'E'}]
-        for (var j = 0; j < 10; j++) {
+        for (var j = 0; j < 1000; j++) {
             var item = {
                 id: j,
                 firstName: line[Math.floor((Math.random() * 5))],
