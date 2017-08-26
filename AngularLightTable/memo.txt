@@ -3,7 +3,7 @@
 ‐SmartTableがベース
 ‐SmartTableに付属していない機能、改善が必要な機能を追加
 ‐ngRepeatを使うため高速化も考慮
-
+-各Columnは独立している　
 依存ライブラリ
 	Bootstrap
 	JQuery

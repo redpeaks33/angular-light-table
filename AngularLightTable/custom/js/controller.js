@@ -31,7 +31,8 @@ main.controller('MyController', ['$scope',  function ($scope) {
             firstName: firstName,
             lastName: lastName,
             nationality: nationality,
-            education: education
+            education: education,
+            visible: true
         };
     }
     //#endregion Random List
@@ -47,7 +48,8 @@ main.controller('MyController', ['$scope',  function ($scope) {
                 firstName: line[Math.floor((Math.random() * 5))],
                 lastName: model[Math.floor((Math.random() * 5))],
                 nationality: {id:j,name:'EQ' + j},
-                education: {id:j, name:'EQ' + j}
+                education: { id: j, name: 'EQ' + j },
+                visible: true,
             };
             $scope.collection.push(item);
         };
