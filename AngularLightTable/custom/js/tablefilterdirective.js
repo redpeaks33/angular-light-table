@@ -190,8 +190,6 @@ main.directive('filCol', function () {
         scope: {
             predicate: '@',
             title: '@',
-            onlyshowing: '=',
-            onlychecked: '=',
             colwidth: '@',
             disable: '=' 
         },
@@ -282,13 +280,13 @@ main.directive('filCol', function () {
 
             //#region column size
             function initializeColumn(element) {
-                element[0].style.width = scope.colwidth + 'px';
+                element[0].style.width = scope.colwidth + '%';
                 element[0].style.backgroundColor = 'gray';
 
                 //search index of th, and use its index in order to set td width.
                 var index = $('th').index(element[0]) + 1;
                 _.each($('tbody > tr > td:nth-child(' + index + ')'), function (n) {
-                    n.style.width = scope.colwidth + 'px';
+                    n.style.width = scope.colwidth + '%';
                 });
 
             }

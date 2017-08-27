@@ -18,15 +18,16 @@ SmartTable追加機能
 			Text Filter
 			選択しても閉じない	
 			各Column独立	
-			Fix Header
 			表示されているものだけをFilterに表示
 			Sort
-			Sortされているかのアイコン
-			Filter、Sort中は Loading表示
-			最初表示するものだけLoad　
-			Pagenation
-			Scroll InfinityLoad
 			Column幅を％で表現
+			
+
+			Fix Header
+			Scroll InfinityLoad
+			Filter、Sort中は Loading表示
+			Sortされているかのアイコン
+			Pagenation
 	SmartTable 自作
 --------------------------------------------------------------------------------------------------------------
 

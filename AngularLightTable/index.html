@@ -25,7 +25,7 @@
     <script src="/scripts/smarttable/smart-table.js"></script>
     <!--table filter-->
     <script src="/custom/js/tablefilterdirective.js"></script>
-    <link href="/custom/css/TableFilter.css" rel="stylesheet" type="text/css" />
+    <link href="/custom/css/table-custom.css" rel="stylesheet" type="text/css" />
     <!--infinity scroll-->
     <script src="/custom/js/infinityscroll/infinite-scroll.js"></script>
     <!--table infinite scroll-->
@@ -40,15 +40,16 @@
 </head>
 <body>
     <div ng-controller="MyController" ng-init="initialize()">
-        <table id="#sample" st-table="displayed" st-safe-src="collection" class="table table-bordered table-striped">
+        <div class="table-container">
+        <table st-table="displayed" st-safe-src="collection" class="table table-bordered table-striped">
             {{displayed.length}}
             <thead>
                 <tr fil-Row showing="displayed" original="collection">
-                    <th fil-Col title="id" colwidth="50" disable="true"></th>
-                    <th fil-Col predicate="firstName" title="이름" onlyshowing="false" onlychecked="false" colwidth="150"  disable="false"/>
-                    <th fil-Col predicate="lastName" title="성" onlyshowing="false" onlychecked="false" colwidth="500" disable="false"/>
-                    <th fil-Col predicate="nationality" title="국적" onlyshowing="true" onlychecked="true" colwidth="250" disable="false"/>
-                    <th fil-Col predicate="education" title="교육" onlyshowing="false" onlychecked="false" colwidth="300" disable="false"/>
+                    <th fil-Col title="id" colwidth="10" disable="true"></th>
+                    <th fil-Col predicate="firstName" title="이름" colwidth="15"  disable="false"/>
+                    <th fil-Col predicate="lastName" title="성" colwidth="50" disable="false"/>
+                    <th fil-Col predicate="nationality" title="국적" colwidth="15" disable="false"/>
+                    <th fil-Col predicate="education" title="교육" colwidth="35" disable="false"/>
                 </tr>
             </thead>
             <tbody infinite-Scroll showing="displayed" original="collection" rownum="40">
@@ -62,6 +63,7 @@
             </tbody>
             <tfoot></tfoot>
         </table>
+        </div>
     </div>
 </body>
 </html>
