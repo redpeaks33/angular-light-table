@@ -37,15 +37,18 @@
                     _.each($scope.original, function (item) {
                         item.visible = true;
                     });
-
             
-                    
                     //#region synchronize visible of table row with on/off item.
                     _.each($scope.original, function (item) {
                         var filterElement = _.find($scope.filterInfoContainer[predicate], function (n) {
                             return n.value == item[predicate].name
                         });
-                        item.visible = filterElement.selected;
+                        if (!filterElement) {
+                            item.visible = false;
+                        }
+                        else {
+                            item.visible = filterElement.selected;
+                        }
                     });
                     //#endregion
                 }
@@ -225,12 +228,26 @@ main.directive('filCol', function () {
             //#region crate check on/off items for filter
             function createItems() {
                 //extract predicate and get uniq and sort.
-                let distinctRows = createDistinctRows();
+                let distinctRows = createDistinctRows(scope.original);
                 return createItemsMap(distinctRows)
             }
-            function createDistinctRows() {
-                return _.sortBy(_.uniq(_.flatten(_.pluck(scope.original, scope.predicate))));
+
+            function createItems_showing(rows) {
+                //extract predicate and get uniq and sort.
+                let distinctRows = createDistinctRows(rows);
+                return createItemsMap(distinctRows)
             }
+
+            function createItems_checked() {
+                //extract predicate and get uniq and sort.
+                let distinctRows = createDistinctRows(scope.original);
+                return createItemsMap(distinctRows)
+            }
+
+            function createDistinctRows(rows) {
+                return _.sortBy(_.uniq(_.flatten(_.pluck(rows, scope.predicate))));
+            }
+
             function createItemsMap(distinctRows) {
                 //Add 'All' to list head.
                 distinctRows.unshift({
@@ -258,7 +275,6 @@ main.directive('filCol', function () {
             function synchronizeAllSelection() {
                 //filter off item except 'Select All'.
                 let unCheckedElements = _.where(_.rest(scope.items), { selected: false });
-
                 //Set on/off to 'Select All' 
                 _.first(scope.items).selected = (unCheckedElements.length == 0);
             }
@@ -289,7 +305,6 @@ main.directive('filCol', function () {
                         item.selected = element.selected;
                     });
                 }
-
                 updateParentFilterContainer();
                 tableFilterCtrl.executeFilter(element, scope.predicate);
             };
@@ -318,6 +333,8 @@ main.directive('filCol', function () {
 
             //Show filter items only showed itemson table.
             scope.showListingItem = function () {
+                let list = tableFilterCtrl.getShowingCollection();
+                scope.items = createItems_showing(list);
                 updateParentFilterContainer();
             };
 
@@ -329,9 +346,7 @@ main.directive('filCol', function () {
 
             //#region synchronize item check on/off with rows when clicked dropdown 
             scope.synchronizeCheckItems = function () {
-                if (true) {
-                    createItems(scope.showing);
-                }
+                createItems();
 
                 let rows = tableFilterCtrl.getShowingCollection();
 

@@ -12,9 +12,9 @@
 
 SmartTable基本機能
 	stSafe
-追加機能
+SmartTable追加機能
 	Filter	CheckBox On/Off
-			All Check	
+			Select All	
 			Text Filter
 			選択しても閉じない	
 			各Column独立	
@@ -23,10 +23,28 @@ SmartTable基本機能
 			Sort
 			Sortされているかのアイコン
 			Filter、Sort中は Loading表示
-			最初表示するものだけLoad　Pagenation on Scroll InfinityLoad
+			最初表示するものだけLoad　
+			Pagenation
+			Scroll InfinityLoad
 			Column幅を％で表現
 	SmartTable 自作
 --------------------------------------------------------------------------------------------------------------
+
+	--------------------------------------------------------------------------------------------------------------
+機能一覧
+	選択しても閉じない
+	選択領域が一行
+	各ColumnでSort
+	各Columnで文字列検索　全体でも検索
+	各ColumnでAnd条件でFilter
+	Fix Header
+	表示されているものだけをFilterに表示
+	Filter、Sort中は Loading表示
+	Column幅を％で表現
+	最初表示するものだけLoad　
+	Pagenation 
+	Scroll InfinityLoad
+----------------------------------------------------------------------------------------------------------------
 第一弾
 	－各ColumnでAnd条件でFilter
 	－smart table 上で動作する
@@ -41,17 +59,3 @@ SmartTable基本機能
 	-各ColumnでOr条件でFilter
 	-各ColumnでSort
 	-各Columnで文字列検索　全体でも検索
-
-	--------------------------------------------------------------------------------------------------------------
-	機能一覧
-
-	選択しても閉じない
-	選択領域が一行
-	各ColumnでSort
-	各Columnで文字列検索　全体でも検索
-	各ColumnでAnd条件でFilter
-	Fix Header
-	表示されているものだけをFilterに表示
-	Filter、Sort中は Loading表示
-	Column幅を％で表現
-	最初表示するものだけLoad　Pagenation on Scroll InfinityLoad

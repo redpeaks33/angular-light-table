@@ -6,11 +6,11 @@
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-click="$event.stopPropagation()">
         <li>
-            <button class="btn btn-xs" ng-click="sort(true)"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span></button>
             <button class="btn btn-xs" ng-click="sort(false)"><span class="glyphicon glyphicon-sort-by-alphabet"></span></button>
-            <button class="btn btn-xs pull-right" ng-click="clear()"><span class="glyphicon glyphicon-refresh"></span></button>
-            <button ng-if="false" class="btn btn-xs" ng-click="showListingItem()"><span class="glyphicon glyphicon-list"></span></button>
-            <button ng-if="false" class="btn btn-xs" ng-click="showCheckedItem()"><span class="glyphicon glyphicon-check"></span></button>
+            <button class="btn btn-xs" ng-click="sort(true)"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span></button>
+            <button class="btn btn-xs" ng-click="clear()"><span class="glyphicon glyphicon-refresh"></span></button>
+            <button class="btn btn-xs" ng-click="showListingItem()"><span class="glyphicon glyphicon-list"></span></button>
+            <button class="btn btn-xs" ng-click="showCheckedItem()" ng-show="false"><span class="glyphicon glyphicon-check"></span></button>
         </li>
         <li><input type="text" class="searchtext" ng-model="searchText" ng-change="textSearch(searchText)" ng-model-options="{debounce: 1000}"></li>
         <li ng-repeat="item in items">
@@ -20,10 +20,21 @@
         </li>
     </ul>
     <style>
+        .dropdown-menu {
+            margin-left: 40px;
+        }
         ul > li:nth-child(-n+2) {
             padding-left:10px;
             padding-right:10px;
             padding-bottom:5px;
+        }
+
+        ul > li:nth-child(1){
+            display:flex;
+        }
+        ul > li:nth-child(1) > button:nth-child(n){
+            flex-basis:20%;
+            margin-right:5px;
         }
 
         .filteritem:hover{
@@ -36,7 +47,7 @@
         }
 
         .filterdiveder{
-            border-bottom:1px solid #4cff00;
+            border-bottom:2px solid red;
         }
         .dropdown-menu{
             background-color: rgba(0,255,0,0.5);
