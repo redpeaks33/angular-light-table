@@ -1,4 +1,6 @@
-﻿Filter
+﻿Million Dollar Table
+100万行処理可能であり、100万ドルの価値があるTable
+
 目的	 SmartTable ＋　Filter機能
 ‐SmartTableがベース
 ‐SmartTableに付属していない機能、改善が必要な機能を追加
@@ -22,7 +24,6 @@ SmartTable追加機能
 			Sort
 			Column幅を％で表現
 			
-
 			Fix Header
 			Scroll InfinityLoad
 			Filter、Sort中は Loading表示
@@ -33,6 +34,7 @@ SmartTable追加機能
 
 	--------------------------------------------------------------------------------------------------------------
 機能一覧
+	Column固定
 	選択しても閉じない
 	選択領域が一行
 	各ColumnでSort
@@ -60,3 +62,19 @@ SmartTable追加機能
 	-各ColumnでOr条件でFilter
 	-各ColumnでSort
 	-各Columnで文字列検索　全体でも検索
+
+
+memo
+	１ページに５０項目以上で重くなる
+	Jasminでテスト
+	Cereniumでテスト
+	Angular NgRepeat最適解を探す
+	Fontawesome相対パス問題
+
+	pagenation <--> infinity 
+
+	name
+	visible
+	selected
+	--------
+	id

@@ -1,6 +1,7 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="../custom/js/controller.js" />
 /// <reference path="../custom/js/InfiniteScrollDirective.js" />
+/// <reference path="../custom/js/JSONCreationService.js" />
 /// <reference path="../custom/js/tablefilterdirective.js" />
 /// <reference path="angular.js" />
 /// <reference path="angular-mocks.js" />
