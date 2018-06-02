@@ -9,7 +9,7 @@ main.controller('MyController', ['$scope', '$timeout', 'JSONCreationService',
 
             $scope.$on("repeatFinishedEventFired", function () {
                 var endTime = new Date();
-                alert(endTime - startTime + "ms");
+                //alert(endTime - startTime + "ms");
             })
         }
     }]);

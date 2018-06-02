@@ -8,7 +8,7 @@
     educationList = [{ id: 1, name: 'Doctorate' }, { id: 2, name: 'Master' }, { id: 3, name: 'Bachelor' }, { id: 4, name: 'High school' }];
 
             this.execute = function () {
-                for (var j = 1; j < 1000; j++) {
+                for (var j = 1; j < 10000; j++) {
                     list.push(createRandomItem(j));
                 };
                 return list;

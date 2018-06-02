@@ -7,5 +7,7 @@
 /// <reference path="angular-mocks.js" />
 /// <reference path="bootstrap.js" />
 /// <reference path="jquery-1.9.1.js" />
+/// <reference path="less-1.5.1.js" />
+/// <reference path="less-1.5.1.min.js" />
 /// <reference path="smarttable/smart-table.js" />
 /// <reference path="underscore.js" />

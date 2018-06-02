@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "custom/css/base.css",
+    "inputFile": "custom/css/base.less"
+  },
+  {
+    "outputFile": "custom/css/table-custom.css",
+    "inputFile": "custom/css/table-custom.less"
+  }
+]

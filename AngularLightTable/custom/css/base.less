@@ -1,0 +1,34 @@
+﻿html, body {
+    overflow: hidden;
+}
+
+.table-container {
+    height: 120vh;
+
+    & thead {
+        display: block;
+        width: 500px;
+    }
+
+    & tbody {
+        overflow-x: auto;
+        overflow-y: auto;
+        position: absolute;
+        display: block;
+        height: 60vh;
+        width: 100vw;
+        background-color: blue;
+
+        & td:nth-child(n) {
+            width: 500px;
+            max-width: 500px;
+            min-width: 500px;
+        }
+
+        & td:nth-child(1) {
+            width: 100px !important;
+            min-width: 100px !important;
+            max-width: 100px !important;
+        }
+    }
+}
