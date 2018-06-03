@@ -30,6 +30,13 @@ mdt.constant('mdtConfig', {
         skipNatural: false,
         delay: 300
     },
+    scroll: {
+        rownum: {
+            initial: 35,
+            additional: 35,
+            current: 35
+        }
+    },
     pipe: {
         delay: 100 //ms
     }
@@ -47,82 +54,82 @@ mdt.directive('mildTableFilter', [function () {
             function ($scope, $rootScope, $timeout, mdtConfig) {
                 $scope.filterInfoContainer = {};
 
-                ////#region getter
-                //this.getFilterInfoContainer = function () {
-                //    return $scope.filterInfoContainer;
-                //}
+                //////#region getter
+                ////this.getFilterInfoContainer = function () {
+                ////    return $scope.filterInfoContainer;
+                ////}
 
-                //this.getOriginalCollection = function () {
-                //    return $scope.original;
-                //};
+                ////this.getOriginalCollection = function () {
+                ////    return $scope.original;
+                ////};
 
-                //this.getShowingCollection = function () {
-                //    return $scope.showing;
+                ////this.getShowingCollection = function () {
+                ////    return $scope.showing;
+                ////};
+                //////#endregion
+
+                ////#region execute filter
+                //this.executeFilter = function (element, predicate) {
+                //    //if selected all, don't execute filter. Display all
+                //    if (element.value == 'Select All') {
+                //        //Synchronize with 'All'
+                //        _.each($scope.original, function (item) {
+                //            item.visible = element.selected;
+                //        })
+                //    }
+                //    else {
+                //        //initialize
+                //        _.each($scope.original, function (item) {
+                //            item.visible = true;
+                //        });
+
+                //        //#region synchronize visible of table row with on/off item.
+                //        _.each($scope.original, function (item) {
+                //            var filterElement = _.find($scope.filterInfoContainer[predicate], function (n) {
+                //                return n.value == item[predicate].name
+                //            });
+                //            if (!filterElement) {
+                //                item.visible = false;
+                //            }
+                //            else {
+                //                item.visible = filterElement.selected;
+                //            }
+                //        });
+                //        //#endregion
+                //    }
+                //    //set collection in order to display
+                //    $scope.showing = _.filter($scope.original, function (n) { return n.visible })
                 //};
                 ////#endregion
 
-                //#region execute filter
-                this.executeFilter = function (element, predicate) {
-                    //if selected all, don't execute filter. Display all
-                    if (element.value == 'Select All') {
-                        //Synchronize with 'All'
-                        _.each($scope.original, function (item) {
-                            item.visible = element.selected;
-                        })
-                    }
-                    else {
-                        //initialize
-                        _.each($scope.original, function (item) {
-                            item.visible = true;
-                        });
+                ////#region sort
+                //this.executeSort = function (isDesc, predicate) {
+                //    $scope.showing = _.sortBy($scope.showing, function (n) {
+                //        return n[predicate].name;
+                //    });
 
-                        //#region synchronize visible of table row with on/off item.
-                        _.each($scope.original, function (item) {
-                            var filterElement = _.find($scope.filterInfoContainer[predicate], function (n) {
-                                return n.value == item[predicate].name
-                            });
-                            if (!filterElement) {
-                                item.visible = false;
-                            }
-                            else {
-                                item.visible = filterElement.selected;
-                            }
-                        });
-                        //#endregion
-                    }
-                    //set collection in order to display
-                    $scope.showing = _.filter($scope.original, function (n) { return n.visible })
-                };
-                //#endregion
+                //    if (isDesc) {
+                //        $scope.showing = $scope.showing.reverse();
+                //    }
+                //};
+                ////#endregion
 
-                //#region sort
-                this.executeSort = function (isDesc, predicate) {
-                    $scope.showing = _.sortBy($scope.showing, function (n) {
-                        return n[predicate].name;
-                    });
+                ////#region text search
+                //this.executeTextSearch = function (text, predicate) {
+                //    //this.executeInitialize();
+                //    //set collection in order to display
+                //    $scope.showing = _.filter($scope.showing, function (n) {
+                //        return n[predicate].name.toLowerCase().indexOf(text.toLowerCase()) != -1;
+                //    })
+                //};
+                ////#endregion
 
-                    if (isDesc) {
-                        $scope.showing = $scope.showing.reverse();
-                    }
-                };
-                //#endregion
-
-                //#region text search
-                this.executeTextSearch = function (text, predicate) {
-                    //this.executeInitialize();
-                    //set collection in order to display
-                    $scope.showing = _.filter($scope.showing, function (n) {
-                        return n[predicate].name.toLowerCase().indexOf(text.toLowerCase()) != -1;
-                    })
-                };
-                //#endregion
-
-                //#region initialize
-                this.executeInitialize = function () {
-                    //set collection in order to display
-                    $scope.showing = $scope.original;
-                };
-                //#endregion
+                ////#region initialize
+                //this.executeInitialize = function () {
+                //    //set collection in order to display
+                //    $scope.showing = $scope.original;
+                //};
+                ////#endregion
             }],
 
         compile: function (element, attr) {
@@ -353,7 +360,8 @@ mdt.controller('mildTableController', ['$scope', '$timeout', 'mdtConfig', 'MildT
 
             if (original) {
                 //Deep Copy
-                $scope.display = [].concat($scope.original);
+                //$scope.display = [].concat($scope.original);
+                $scope.display = _.first([].concat($scope.original), mdtConfig.scroll.rownum.initial);
 
                 mdtConfig.list = {
                     original: $scope.original,
@@ -366,7 +374,24 @@ mdt.controller('mildTableController', ['$scope', '$timeout', 'mdtConfig', 'MildT
             //Filter Logic
             MildTableFilterService.execute();
             $scope.original = mdtConfig.list.original;
-            $scope.display = mdtConfig.list.display;
+
+            mdtConfig.scroll.rownum.additional = mdtConfig.scroll.rownum.initial;
+            mdtConfig.scroll.rownum.current = mdtConfig.scroll.rownum.initial;
+            $scope.display = _.first(mdtConfig.list.display, mdtConfig.scroll.rownum.initial);
+        });
+
+        $scope.$on('scrollMildTable', function () {
+            if ($scope.display) {
+                let skip = mdtConfig.scroll.rownum.current;
+                let take = mdtConfig.scroll.rownum.additional;
+
+                mdtConfig.scroll.rownum.current += mdtConfig.scroll.rownum.additional;
+                let additional = mdtConfig.list.original.slice(skip, skip + take);
+
+                $scope.display = $scope.display.concat(additional);
+
+                $scope.$apply('display');
+            }
         })
     }
 ]);
@@ -397,12 +422,15 @@ mdt.directive("mildTablePagenation", ['$rootScope', 'mdtConfig',
                 itemsNum: '=',
                 pagesNum: '=',
             },
-            template: '<button ng-click="initializeFilter()"></button>',
+            template: '<input class="form-control" placeholder="input page size" type="number"></input>' +
+                      '<nav ng-if="numPages && pages.length >= 2"><ul class="pagination">' +
+                      '<li ng-repeat="page in pages" ng-class="{active: page==currentPage}"><a href="javascript: void(0);" ng-click="selectPage(page)">{{page}}</a></li>' +
+                      '</ul></nav>',
             link: function (scope, element, attr, ctrl) {
-                scope.initializeFilter = function () {
-                    mdtConfig.list.display = [].concat(mdtConfig.list.original);
-                    $rootScope.$broadcast('updateMildTable');
-                }
+                //scope.initializeFilter = function () {
+                //    mdtConfig.list.display = [].concat(mdtConfig.list.original);
+                //    $rootScope.$broadcast('updateMildTable');
+                //}
             }
         };
     }]);
@@ -411,10 +439,14 @@ mdt.directive("mildTableTextFilter", ['$rootScope', 'mdtConfig',
     function ($rootScope, mdtConfig) {
         return {
             restrict: 'A',
-            template: '<button ng-click="initializeFilter()"></button>',
+            template: '<div class="input-group">' +
+                    '<input type="text" class="form-control" ng-model="word" ng-change="textFilter(word)" placeholder="Search" id="inputGroup"/>' +
+                    '<button class="input-group-addon" ng-click="textFilter(word)"><i class="fa fa-search"></i></button>' +
+                    '</div>',
             link: function (scope, element, attr, ctrl) {
-                scope.initializeFilter = function () {
-                    mdtConfig.list.display = [].concat(mdtConfig.list.original);
+                scope.word = '';
+                scope.textFilter = function (word) {
+                    mdtConfig.filter.text = word;
                     $rootScope.$broadcast('updateMildTable');
                 }
             }
@@ -425,13 +457,18 @@ mdt.directive("mildTableInitialize", ['$rootScope', 'mdtConfig',
     function ($rootScope, mdtConfig) {
         return {
             restrict: 'A',
-            template: '<button ng-click="initializeFilter()"></button>',
+            template: '<button ng-click="initializeFilter()" class="btn "><span class="glyphicon glyphicon-refresh" /></button>',
             link: function (scope, element, attr, ctrl) {
                 scope.initializeFilter = function () {
                     mdtConfig.list.display = [].concat(mdtConfig.list.original);
-                    mdtConfig.filter.map = [];
                     mdtConfig.filter.text = '';
                     mdtConfig.sort.order = [];
+                    mdtConfig.scroll.rownum_additional = mdtConfig.scroll.rownum_initial;
+                    _.each(mdtConfig.filter.map, function (n) {
+                        _.each(n.map, function (m) {
+                            m.selected = true;
+                        })
+                    })
                     $rootScope.$broadcast('updateMildTable');
                 }
             }
@@ -485,8 +522,6 @@ mdt.service('MildTableFilterService', ['mdtConfig', function (mdtConfig) {
 
         //filter text
         //filterText();
-
-        //need update mdtConfig.filter
     }
 
     let initializeVisible = function () {
@@ -530,4 +565,28 @@ mdt.service('MildTableFilterService', ['mdtConfig', function (mdtConfig) {
             });
         })
     }
+}]);
+
+/////////////////////////////////////
+
+mdt.directive('mildTableScroll', ['$rootScope', function ($rootScope) {
+    return {
+        restrict: 'A',
+        controller: 'mildTableController',
+        scope: {
+            original: '=',
+            display: '='
+        },
+        compile: function (element, attr) {
+            return function (scope, element, attr, ctrl) {
+                let raw = element[0];
+
+                element.bind("scroll", function () {
+                    if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+                        $rootScope.$broadcast('scrollMildTable');
+                    }
+                });
+            }
+        }
+    };
 }]);

@@ -11,14 +11,14 @@
                 <th></th>
             </tr>
             <tr>
-                <th mild-table-col title="id" colwidth="10" enable="false"></th>
-                <th mild-table-col predicate="firstName" title="이름" colwidth="30" enable="true" />
-                <th mild-table-col predicate="lastName" title="성" colwidth="10" enable="true" />
-                <th mild-table-col predicate="nationality" title="국적" colwidth="30" enable="true" />
-                <th mild-table-col predicate="education" title="교육" colwidth="10" enable="true" />
+                <th mild-table-col title="id" colwidth="20" enable="false"></th>
+                <th mild-table-col predicate="firstName" title="이름" colwidth="20" enable="true" />
+                <th mild-table-col predicate="lastName" title="성" colwidth="20" enable="true" />
+                <th mild-table-col predicate="nationality" title="국적" colwidth="20" enable="true" />
+                <th mild-table-col predicate="education" title="교육" colwidth="20" enable="true" />
             </tr>
         </thead>
-        <tbody>
+        <tbody mild-table-scroll>
             <tr ng-repeat="row in display" mild-table-pipe ng-show="row.visible">
                 <td>{{row.id}}</td>
                 <td>{{row.firstName.name}}</td>

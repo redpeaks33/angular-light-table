@@ -1,6 +1,20 @@
 ﻿Million Dollar Table
 100万行処理可能であり、100万ドルの価値があるTable
 
+6/6
+filter と Scrollが連動していない。もう一つListが必要
+レイアウト
+PageNation作成
+
+Git
+Demoページ
+smart Table
+AGTableを参考に
+
+6/17リリース目標
+
+
+
 目的	 SmartTable ＋　Filter機能
 ‐SmartTableがベース
 ‐SmartTableに付属していない機能、改善が必要な機能を追加
