@@ -1,4 +1,4 @@
-﻿var main = angular.module("app", []);
+﻿var main = angular.module("app", ["million-dollar-table"]);
 
 main.controller('MyController', ['$scope', '$timeout', 'JSONCreationService',
     function ($scope, $timeout, JSONCreationService) {
@@ -7,19 +7,21 @@ main.controller('MyController', ['$scope', '$timeout', 'JSONCreationService',
 
             $scope.collection = JSONCreationService.execute();
 
-            $scope.$on("repeatFinishedEventFired", function () {
-                var endTime = new Date();
-                //alert(endTime - startTime + "ms");
-            })
+            //$scope.$on("repeatFinishedEventFired", function () {
+            //    var endTime = new Date();
+            //    //alert(endTime - startTime + "ms");
+            //})
         }
+        //$scope.initializeFilter = function () {
+        //    alert('initializeFilter -basecontroller');
+        //}
     }]);
 
-main.directive("repeatFinished", function ($timeout) {
-    return function (scope, element, attrs) {
-        if (scope.$last) {
-            $timeout(function () {
-                scope.$emit("repeatFinishedEventFired"); //イベント着火！
-            });
-        }
+main.directive("myHello", function () {
+    return {
+        restrict: 'EA',
+        replace: true,
+        scope: false,
+        templateUrl: '/custom/html/Table.html'
     }
 });

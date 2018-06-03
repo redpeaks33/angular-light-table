@@ -16,7 +16,6 @@ body {
   display: block;
   height: 60vh;
   width: 100vw;
-  background-color: blue;
 }
 .table-container tbody td:nth-child(n) {
   width: 500px;

@@ -1,16 +1,13 @@
-﻿<div ng-if="disable">{{dropdownLabel}}</div>
-<div class="dropdown" ng-if="!disable">
+﻿<div ng-if="!enable">{{title}}</div>
+<div class="dropdown" ng-if="enable">
     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-click="synchronizeCheckItems();">
-        {{dropdownLabel}}
+        {{title}}
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-click="$event.stopPropagation()">
         <li>
-            <button class="btn btn-xs" ng-click="sort(false)"><span class="glyphicon glyphicon-sort-by-alphabet"></span></button>
-            <button class="btn btn-xs" ng-click="sort(true)"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span></button>
-            <button class="btn btn-xs" ng-click="clear()"><span class="glyphicon glyphicon-refresh"></span></button>
-            <button class="btn btn-xs" ng-click="showListingItem()"><span class="glyphicon glyphicon-list"></span></button>
-            <button class="btn btn-xs" ng-click="showCheckedItem()" ng-show="false"><span class="glyphicon glyphicon-check"></span></button>
+            <button class="btn btn-xs" ng-click="sort(true)"><span class="glyphicon glyphicon-sort-by-alphabet"></span></button>
+            <button class="btn btn-xs" ng-click="sort(false)"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span></button>
         </li>
         <li><input type="text" class="searchtext" ng-model="searchText" ng-change="textSearch(searchText)" ng-model-options="{debounce: 1000}"></li>
         <li ng-repeat="item in items">
