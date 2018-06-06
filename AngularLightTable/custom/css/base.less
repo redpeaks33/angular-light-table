@@ -4,6 +4,7 @@
 
 @table-width: 50vw;
 @table-min-width: 10vw;
+@basecolor: #85c1e9;
 
 .table-container {
     background-color: white;
@@ -12,7 +13,7 @@
     & thead {
         display: block;
         width: @table-width;
-        background-color: red;
+        background-color: @basecolor;
     }
 
     & tbody {
@@ -21,5 +22,43 @@
         display: block;
         height: 111px;
         width: @table-width;
+    }
+
+    & .dropdown {
+        & .dropdown-menu {
+            margin-left: 50px;
+        }
+
+        & ul > li:nth-child(-n+1) {
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+        }
+
+        & ul > li:nth-child(1) {
+            display: flex;
+        }
+
+        & ul > li:nth-child(1) > button:nth-child(n) {
+            flex-basis: 20%;
+            margin-right: 5px;
+        }
+
+        & .filteritem:hover {
+            background-color: @basecolor;
+        }
+
+        & .filteritem {
+            width: 100%;
+            padding-left: 10px;
+        }
+
+        & .filterdiveder {
+            border-bottom: 2px solid @basecolor;
+        }
+
+        & .dropdown-menu {
+            background-color: rgba(133,193,233,0.5);
+        }
     }
 }

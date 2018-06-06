@@ -9,7 +9,6 @@
             <button class="btn btn-xs" ng-click="sort(true)"><span class="glyphicon glyphicon-sort-by-alphabet"></span></button>
             <button class="btn btn-xs" ng-click="sort(false)"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span></button>
         </li>
-        <li><input type="text" class="searchtext" ng-model="searchText" ng-change="textSearch(searchText)" ng-model-options="{debounce: 1000}"></li>
         <li ng-repeat="item in items">
             <label class="filteritem" ng-class="{filterdiveder:$first}">
                 <input type="checkbox" ng-model="item.selected" ng-change="filterChanged(item)">&nbsp;&nbsp;{{item.value}}
@@ -17,40 +16,5 @@
         </li>
     </ul>
     <style>
-        .dropdown-menu {
-            margin-left: 40px;
-        }
-
-        ul > li:nth-child(-n+2) {
-            padding-left: 10px;
-            padding-right: 10px;
-            padding-bottom: 5px;
-        }
-
-        ul > li:nth-child(1) {
-            display: flex;
-        }
-
-            ul > li:nth-child(1) > button:nth-child(n) {
-                flex-basis: 20%;
-                margin-right: 5px;
-            }
-
-        .filteritem:hover {
-            background-color: green;
-        }
-
-        .filteritem {
-            width: 100%;
-            padding-left: 10px;
-        }
-
-        .filterdiveder {
-            border-bottom: 2px solid red;
-        }
-
-        .dropdown-menu {
-            background-color: rgba(0,255,0,0.5);
-        }
     </style>
 </div> 

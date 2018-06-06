@@ -3,7 +3,8 @@
 mdt.constant('mdtConfig', {
     list: {
         original: [],
-        display: []
+        display: [],
+        scrolled: []
     },
     pagination: {
         template: 'template/smart-table/pagination.html',
@@ -346,6 +347,7 @@ mdt.directive('mildTableTh', ['mdtConfig', '$rootScope', function (mdtConfig, $r
     };
 }]);
 
+//td element
 mdt.directive('mildTableTd', ['mdtConfig', '$rootScope', function (mdtConfig, $rootScope) {
     return {
         restrict: 'EA',
@@ -357,14 +359,13 @@ mdt.directive('mildTableTd', ['mdtConfig', '$rootScope', function (mdtConfig, $r
             //#region column size
             initializeColumn(element);
             function initializeColumn(element) {
-                //element[0].style.width = attr.colwidth + '%';
                 element[0].style.width = attr.colwidth + 'px';
-                // element[0].style.backgroundColor = 'red';
             }
             //#endregion
         }
     };
 }]);
+
 mdt.controller('mildTableController', ['$scope', '$timeout', 'mdtConfig', 'MildTableFilterService',
     function ($scope, $timeout, mdtConfig, MildTableFilterService) {
         //Deep Copy
@@ -455,7 +456,7 @@ mdt.directive("mildTableTextFilter", ['$rootScope', 'mdtConfig',
         return {
             restrict: 'A',
             template: '<div class="input-group">' +
-                    '<input type="text" class="form-control" ng-model="word" ng-change="textFilter(word)" placeholder="Search" id="inputGroup"/>' +
+                    '<input type="text" class="form-control" ng-model="word" ng-change="textFilter(word)" placeholder="Search" id="inputGroup" ng-model-options="{ debounce: 500 }" />' +
                     '<button class="input-group-addon" ng-click="textFilter(word)"><i class="fa fa-search"></i></button>' +
                     '</div>',
             link: function (scope, element, attr, ctrl) {
@@ -536,7 +537,7 @@ mdt.service('MildTableFilterService', ['mdtConfig', function (mdtConfig) {
         filterCheckbox();
 
         //filter text
-        //filterText();
+        filterText();
     }
 
     let initializeVisible = function () {
@@ -575,9 +576,11 @@ mdt.service('MildTableFilterService', ['mdtConfig', function (mdtConfig) {
         let l = mdtConfig.list.display;
 
         _.each(l, function (item) {
+            text_result_visible = false;
             _.each(mdtConfig.filter.map, function (f) {
-                item.visible &= (item[f.predicate].name.toLowerCase().indexOf(text.toLowerCase()) != -1);
+                text_result_visible |= (item[f.predicate].name.toLowerCase().indexOf(mdtConfig.filter.text.toLowerCase()) != -1);
             });
+            item.visible &= text_result_visible;
         })
     }
 }]);
@@ -587,10 +590,6 @@ mdt.directive('mildTableScroll', ['$rootScope', function ($rootScope) {
     return {
         restrict: 'A',
         controller: 'mildTableController',
-        scope: {
-            original: '=',
-            display: '='
-        },
         compile: function (element, attr) {
             return function (scope, element, attr, ctrl) {
                 let raw = element[0];
