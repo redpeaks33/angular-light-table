@@ -8,23 +8,22 @@
                 <th mild-table-text-filter></th>
                 <th mild-table-pagenation items-num="15" pages-num="7"></th>
                 <th></th>
-                <th></th>
             </tr>
             <tr>
-                <th mild-table-col title="id" colwidth="20" enable="false"></th>
-                <th mild-table-col predicate="firstName" title="이름" colwidth="20" enable="true" />
-                <th mild-table-col predicate="lastName" title="성" colwidth="20" enable="true" />
-                <th mild-table-col predicate="nationality" title="국적" colwidth="20" enable="true" />
-                <th mild-table-col predicate="education" title="교육" colwidth="20" enable="true" />
+                <th mild-table-th title="id" colwidth="100" enable="false"></th>
+                <th mild-table-th predicate="firstName" title="이름" colwidth="150" enable="true" />
+                <th mild-table-th predicate="lastName" title="성" colwidth="150" enable="true" />
+                <th mild-table-th predicate="nationality" title="국적" colwidth="150" enable="true" />
+                <th mild-table-th predicate="education" title="교육" colwidth="150" enable="true" />
             </tr>
         </thead>
         <tbody mild-table-scroll>
             <tr ng-repeat="row in display" mild-table-pipe ng-show="row.visible">
-                <td>{{row.id}}</td>
-                <td>{{row.firstName.name}}</td>
-                <td>{{row.lastName.name}}</td>
-                <td>{{row.nationality.name}}</td>
-                <td>{{row.education.name}}</td>
+                <td mild-table-td colwidth="100">{{row.id}}</td>
+                <td mild-table-td colwidth="150">{{row.firstName.name}}</td>
+                <td mild-table-td colwidth="150">{{row.lastName.name}}</td>
+                <td mild-table-td colwidth="150">{{row.nationality.name}}</td>
+                <td mild-table-td colwidth="150">{{row.education.name}}</td>
             </tr>
         </tbody>
         <tfoot>

@@ -2,32 +2,24 @@
     overflow: hidden;
 }
 
+@table-width: 50vw;
+@table-min-width: 10vw;
+
 .table-container {
-    height: 120vh;
+    background-color: white;
+    width: @table-width;
 
     & thead {
         display: block;
-        width: 500px;
+        width: @table-width;
+        background-color: red;
     }
 
     & tbody {
         overflow-x: auto;
         overflow-y: auto;
-        position: absolute;
         display: block;
-        height: 60vh;
-        width: 100vw;
-
-        & td:nth-child(n) {
-            width: 500px;
-            max-width: 500px;
-            min-width: 500px;
-        }
-
-        & td:nth-child(1) {
-            width: 100px !important;
-            min-width: 100px !important;
-            max-width: 100px !important;
-        }
+        height: 111px;
+        width: @table-width;
     }
 }

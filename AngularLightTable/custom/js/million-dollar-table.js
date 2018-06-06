@@ -157,7 +157,7 @@ mdt.directive('mildTableFilter', [function () {
     };
 }]);
 
-mdt.directive('mildTableCol', ['mdtConfig', '$rootScope', function (mdtConfig, $rootScope) {
+mdt.directive('mildTableTh', ['mdtConfig', '$rootScope', function (mdtConfig, $rootScope) {
     return {
         restrict: 'EA',
         require: '^mildTable',
@@ -165,6 +165,7 @@ mdt.directive('mildTableCol', ['mdtConfig', '$rootScope', function (mdtConfig, $
             predicate: '@',
             title: '@',
             colwidth: '@',
+            color: '@',
             enable: '='
         },
         templateUrl: '/custom/html/TableColumnFilter.html',
@@ -172,14 +173,9 @@ mdt.directive('mildTableCol', ['mdtConfig', '$rootScope', function (mdtConfig, $
             //#region column size
             initializeColumn(element);
             function initializeColumn(element) {
-                element[0].style.width = attr.colwidth + '%';
-                element[0].style.backgroundColor = 'gray';
-
-                //search index of th, and use its index in order to set td width.
-                var index = $('th').index(element[0]) + 1;
-                _.each($('tbody > tr > td:nth-child(' + index + ')'), function (n) {
-                    n.style.width = attr.colwidth + '%';
-                });
+                //element[0].style.width = attr.colwidth + '%';
+                element[0].style.width = attr.colwidth + 'px';
+                // element[0].style.backgroundColor = attr.color;
             }
             //#endregion
 
@@ -350,6 +346,25 @@ mdt.directive('mildTableCol', ['mdtConfig', '$rootScope', function (mdtConfig, $
     };
 }]);
 
+mdt.directive('mildTableTd', ['mdtConfig', '$rootScope', function (mdtConfig, $rootScope) {
+    return {
+        restrict: 'EA',
+        require: '^mildTable',
+        scope: {
+            colwidth: '@',
+        },
+        compile: function (element, attr) {
+            //#region column size
+            initializeColumn(element);
+            function initializeColumn(element) {
+                //element[0].style.width = attr.colwidth + '%';
+                element[0].style.width = attr.colwidth + 'px';
+                // element[0].style.backgroundColor = 'red';
+            }
+            //#endregion
+        }
+    };
+}]);
 mdt.controller('mildTableController', ['$scope', '$timeout', 'mdtConfig', 'MildTableFilterService',
     function ($scope, $timeout, mdtConfig, MildTableFilterService) {
         //Deep Copy
@@ -567,8 +582,7 @@ mdt.service('MildTableFilterService', ['mdtConfig', function (mdtConfig) {
     }
 }]);
 
-/////////////////////////////////////
-
+//infinity scroll
 mdt.directive('mildTableScroll', ['$rootScope', function ($rootScope) {
     return {
         restrict: 'A',
