@@ -12,11 +12,10 @@ body {
   background-color: #85c1e9;
 }
 .table-container tbody {
-  overflow-x: auto;
-  overflow-y: auto;
-  display: block;
-  height: 111px;
   width: 50vw;
+}
+.table-container tbody tr:hover {
+  background-color: #85c1e9;
 }
 .table-container .dropdown .dropdown-menu {
   margin-left: 50px;

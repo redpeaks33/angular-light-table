@@ -1,6 +1,6 @@
 ﻿<div class="table-container">
     <table class="table table-bordered"
-           mild-table display="display" original="collection">
+           mild-table display="display" original="collection" mdtheight="85vh">
         <thead>
             <tr>
                 <th>{{display.length}}/{{collection.length}}</th>
@@ -21,10 +21,10 @@
         <tbody mild-table-scroll>
             <tr ng-repeat="row in display" mild-table-pipe ng-show="row.visible">
                 <td mild-table-td colwidth="100">{{row.id}}</td>
-                <td mild-table-td colwidth="150">{{row.firstName.name}}</td>
-                <td mild-table-td colwidth="150">{{row.lastName.name}}</td>
-                <td mild-table-td colwidth="150">{{row.nationality.name}}</td>
-                <td mild-table-td colwidth="150">{{row.education.name}}</td>
+                <td mild-table-td colwidth="150">{{row.firstName}}</td>
+                <td mild-table-td colwidth="150">{{row.lastName}}</td>
+                <td mild-table-td colwidth="150">{{row.nationality}}</td>
+                <td mild-table-td colwidth="150">{{row.education}}</td>
             </tr>
         </tbody>
         <tfoot>

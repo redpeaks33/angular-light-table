@@ -33,9 +33,9 @@ mdt.constant('mdtConfig', {
     },
     scroll: {
         rownum: {
-            initial: 35,
-            additional: 35,
-            current: 35
+            initial: 30,
+            additional: 30,
+            current: 30
         }
     },
     pipe: {
@@ -224,14 +224,11 @@ mdt.directive('mildTableTh', ['mdtConfig', '$rootScope', function (mdtConfig, $r
 
                 function createItemsMap(distinctRows) {
                     //Add 'All' to list head.
-                    distinctRows.unshift({
-                        name: 'Select All',
-                        selected: true
-                    });
+                    distinctRows.unshift('Select All');
                     //convert for checkbox item list.
                     return _.map(distinctRows, function (n) {
                         let item = {
-                            value: n.name, //
+                            value: n, //
                             selected: true
                         }
                         return item;
@@ -329,7 +326,7 @@ mdt.directive('mildTableTh', ['mdtConfig', '$rootScope', function (mdtConfig, $r
 
                     _.each(_.rest(scope.items), function (item) {
                         let visibleRow = _.filter(rows, function (row) {
-                            return row.visible && item.value == row[scope.predicate].name
+                            return row.visible && item.value == row[scope.predicate]
                         });
 
                         item.selected = (visibleRow.length > 0);
@@ -497,7 +494,8 @@ mdt.directive('mildTable', [function () {
         controller: 'mildTableController',
         scope: {
             original: '=',
-            display: '='
+            display: '=',
+            mdtheight: '@'
         },
         compile: function (element, attr) {
             initializeFixedHeader(element);
@@ -512,7 +510,7 @@ mdt.directive('mildTable', [function () {
                 let tbody = $('tbody')[0];
                 tbody.style.display = 'block';
                 tbody.style.overflowY = 'scroll';
-                tbody.style.height = '85vh';
+                tbody.style.height = attr.mdtheight;//'85vh';
                 let thead = $('thead')[0];
                 thead.style.display = 'block';
                 thead.style.paddingRight = '17px';
@@ -551,7 +549,7 @@ mdt.service('MildTableFilterService', ['mdtConfig', function (mdtConfig) {
         let l = mdtConfig.list.display;
         _.each(mdtConfig.sort.order, function (s) {
             l = _.sortBy(l, function (n) {
-                return n[s.predicate].name;
+                return n[s.predicate];
             });
             if (!s.asc) {
                 l = l.reverse();
@@ -567,7 +565,7 @@ mdt.service('MildTableFilterService', ['mdtConfig', function (mdtConfig) {
         _.each(l, function (item) {
             item.visible = true;
             _.each(mdtConfig.filter.map, function (f) {
-                item.visible &= _.findWhere(f.map, { value: item[f.predicate].name }).selected
+                item.visible &= _.findWhere(f.map, { value: item[f.predicate] }).selected
             });
         })
     }
@@ -578,7 +576,7 @@ mdt.service('MildTableFilterService', ['mdtConfig', function (mdtConfig) {
         _.each(l, function (item) {
             text_result_visible = false;
             _.each(mdtConfig.filter.map, function (f) {
-                text_result_visible |= (item[f.predicate].name.toLowerCase().indexOf(mdtConfig.filter.text.toLowerCase()) != -1);
+                text_result_visible |= (item[f.predicate].toLowerCase().indexOf(mdtConfig.filter.text.toLowerCase()) != -1);
             });
             item.visible &= text_result_visible;
         })
